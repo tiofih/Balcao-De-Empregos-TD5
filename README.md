@@ -1,24 +1,15 @@
-# README
+# BALCÃO DE EMPREGOS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projeto criado para o primeiro grande trabalho do TreinaDev turma 5, o software deve gereciar a criação e inscrição de vagas de emprego das empresas cadastradas nele
 
-Things you may want to cover:
+Gems e outros utilizados:
 
-* Ruby version
+* Ruby on Rails
 
-* System dependencies
+* RSpec + Capybara
 
-* Configuration
+* Devise
 
-* Database creation
+# Trello
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* https://trello.com/b/7sMsjUm6/balc%C3%A3o-de-empregos-td5
