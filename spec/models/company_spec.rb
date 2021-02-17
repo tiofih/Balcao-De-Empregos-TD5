@@ -1,5 +1,13 @@
 require 'rails_helper'
 
-RSpec.describe Company, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Company do
+  context 'validation' do
+    it 'attributes cannot de blanck' do
+      company = Company.new
+
+      expect(company.valid?).to eq false
+    end
+
+    
+  end
 end

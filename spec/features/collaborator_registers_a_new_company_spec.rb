@@ -1,14 +1,13 @@
 require 'rails_helper'
 
 feature 'Collaborator registers a new company' do
-    xscenario 'succesfully' do
-        user = User.create!(login: 'filipe@campuscode.com.br', password: '123456')
-        login_as(user, scope: :user)
+    scenario 'succesfully' do
+        user = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        login_as(user, :scope => :user)
 
         visit new_company_path
         fill_in 'Nome da empresa', with: 'Campus Code'
-        #TODO: Alterar Parametros
-        #attach_file 'Logo da Campus', Rails.root.join('spec', 'support', 'logo_da_campus.jpg')
+        find('form input[type="file"]').set(Rails.root.join('spec', 'support', 'logo_da_campus.jpg'))
         fill_in 'Rua', with: 'Rua vinte e seis'
         fill_in 'Número', with: '252'
         fill_in 'Bairro', with: 'Vila Olimpia'
@@ -22,12 +21,33 @@ feature 'Collaborator registers a new company' do
 
         expect(current_path).to eq company_path(Company.last)
         expect(page).to have_content('Campus Code')
-        #expect(page).to have_css('img[src*="logo_da_campus.jpg"]')
-        expect(page).to have_content('Rua vinte e seis, 252')
+        expect(page).to have_css('img[src*="logo_da_campus.jpg"]')
+        expect(page).to have_content('Rua vinte e seis, 252, Vila Olimpia, São Paulo')
         expect(page).to have_content('42.318.949/0001-84')
         expect(page).to have_content('www.campuscode.com.br')
         expect(page).to have_content('@campuscode')
         expect(page).to have_content('@campuscode')
         expect(page).to have_content('Realizadora de sonhos')
+    end
+
+    scenario 'and attributes cannot be blanck' do
+        user = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        login_as(user, :scope => :user)
+
+        visit new_company_path
+        fill_in 'Nome da empresa', with: ''
+        find('form input[type="file"]').set(Rails.root.join('spec', 'support', 'logo_da_campus.jpg'))
+        fill_in 'Rua', with: ''
+        fill_in 'Número', with: ''
+        fill_in 'Bairro', with: ''
+        fill_in 'Cidade', with: ''
+        fill_in 'CNPJ', with: ''
+        fill_in 'Site', with: ''
+        fill_in 'Instagram', with: ''
+        fill_in 'Twitter', with: ''
+        fill_in 'Descrição da empresa', with: ''
+        click_on 'Cadastrar empresa'
+
+        expect(page).to have_content('Não foi possível cadastrar a empresa')
     end
 end

@@ -10,6 +10,8 @@ Gems e outros utilizados:
 
 * Devise
 
+* I18n
+
 # Trello
 
 * https://trello.com/b/7sMsjUm6/balc%C3%A3o-de-empregos-td5

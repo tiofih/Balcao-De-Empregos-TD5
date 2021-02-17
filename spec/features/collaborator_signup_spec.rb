@@ -27,29 +27,28 @@ feature 'Collaborator sign up' do
         expect(current_path).to eq new_company_path
     end
 
-    xscenario 'cannot leave blanck fields' do
+    scenario 'cannot leave blanck fields' do
         visit root_path
         click_on 'Criar login'
 
-        fill_in 'Email', with: ''
+        fill_in 'E-mail', with: ''
         fill_in 'Senha', with: ''
         fill_in 'Confirme sua senha', with: ''
         click_on 'Criar login'
 
-        expect(page).to have_content 'Email não pode ficar em branco'
+        expect(page).to have_content 'E-mail não pode ficar em branco'
         expect(page).to have_content 'Senha não pode ficar em branco'
-        expect(page).to have_content 'Senhas não coincidem'
     end
 
-    xscenario 'Password must be the same' do
+    scenario 'Password must be the same' do
         visit root_path
         click_on 'Criar login'
 
-        fill_in 'Email', with: 'filipe@campuscode.com.br'
+        fill_in 'E-mail', with: 'filipe@campuscode.com.br'
         fill_in 'Senha', with: '123456'
         fill_in 'Confirme sua senha', with: '123457'
         click_on 'Criar login'
 
-        expect(page).to have_content 'Senhas não coincidem'
+        expect(page).to have_content 'Confirme sua senha não é igual a Senha'
     end
 end

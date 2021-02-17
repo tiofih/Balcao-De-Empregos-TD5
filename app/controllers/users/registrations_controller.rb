@@ -61,16 +61,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       super(user)
     end
-    #email = User.find_by(params[:email]).email
-    #company_name = email.gsub(/.+@([^.]+).+/, '\1')
-    #company_search = Company.where('company_name like ?', "%#{company_name}%")
-    #common_emails = ['gmail', 'outlook', 'hotmail']
-    #flash[:notice] = 'Bem vindo! Você realizou seu registro com sucesso.'
-    #if !company_search.any? && !common_emails.include?(company_name)
-    #  redirect_to new_company_path
-    #else
-    #  super(resource)
-    #end
   end
 
   # The path used after sign up for inactive accounts.

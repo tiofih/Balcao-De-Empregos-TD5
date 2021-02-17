@@ -1,0 +1,17 @@
+pt-BR:
+  activerecord:
+    company:
+      one: Empresa
+      other: Empresas
+    attributes:
+      company:
+        company_name: "Nome da empresa"
+        street_name: "Rua"
+        street_number: "Número"
+        district: "Bairro"
+        city: "Cidade"
+        cnpj: "CNPJ"
+        company_site: "Site"
+        company_instagram: "Instagram"
+        company_twitter: "Twitter"
+        company_description: "Descrição da empresa"

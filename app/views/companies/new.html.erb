@@ -1,1 +1,53 @@
-
+<h1>Cadastrar empresa</h1>
+<% if flash[:notice] %>
+  <div class="notice"><%= flash[:notice] %></div>
+<% end %>
+<%= form_with model: @company do |form| %>
+  <div>
+    <%= form.label :company_name %>
+    <%= form.text_field :company_name %>
+  </div>
+  <div>
+    <%= form.label :street_name %>
+    <%= form.text_field :street_name %>
+  </div>
+  <div>
+    <%= form.label :street_number %>
+    <%= form.text_field :street_number %>
+  </div>
+  <div>
+    <%= form.label :district %>
+    <%= form.text_field :district %>
+  </div>
+  <div>
+    <%= form.label :city %>
+    <%= form.text_field :city %>
+  </div>
+  <div>
+    <%= form.label :cnpj %>
+    <%= form.text_field :cnpj %>
+  </div>
+  <div>
+    <%= form.label :company_site %>
+    <%= form.text_field :company_site %>
+  </div>
+  <div>
+    <%= form.label :company_instagram %>
+    <%= form.text_field :company_instagram %>
+  </div>
+  <div>
+    <%= form.label :company_twitter %>
+    <%= form.text_field :company_twitter %>
+  </div>
+  <div>
+    <%= form.label :company_description %>
+    <%= form.text_field :company_description %>
+  </div>
+  <div>
+    <%= form.label "Logo da empresa" %>
+    <%= form.file_field :logo %>
+  </div>
+  <div>
+    <%= form.submit 'Cadastrar empresa'%>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<dl>
+  <dt>Nome da empresa</dt>
+  <dd><%= @company.company_name %></dd>
+  <dt>Endereço</dt>
+  <dd><%= @company.street_name %>, <%= @company.street_number %>, <%= @company.district %>, <%= @company.city %></dd>
+  <dt>CNPJ</dt>
+  <dd><%= @company.cnpj %></dd>
+  <dt>Site</dt>
+  <dd><%= @company.company_site %></dd>
+  <dt>Instagram</dt>
+  <dd><%= @company.company_instagram %></dd>
+  <dt>Twitter</dt>
+  <dd><%= @company.company_twitter %></dd>
+  <dt>Descrição</dt>
+  <dd><%= @company.company_description %></dd>
+  <dt>Logo</dt>
+  <dd><img src="<%= (url_for(@company.logo)) %>"></dd>
+</dl>
