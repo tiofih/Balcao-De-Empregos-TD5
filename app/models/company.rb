@@ -2,7 +2,7 @@ class Company < ApplicationRecord
     has_one_attached :logo
 
     validates :company_name, :street_name, :street_number, :district, 
-                :city, :cnpj, :company_site, :logo, presence: true
+                :city, :cnpj, :company_site, presence: true
     #validates :company_name, uniquiness: true
 
     def self.user_admin? (email)
