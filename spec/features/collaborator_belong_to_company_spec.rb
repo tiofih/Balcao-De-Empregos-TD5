@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Collaborator belong to a company' do
-    scenario 'after first create login is admin' do
+    xscenario 'after first create login is admin' do
         user = User.create!(email: 'filipe@campuscode.com', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                     street_name: 'Rua dois',
@@ -15,7 +15,7 @@ feature 'Collaborator belong to a company' do
         expect(company.user_admin?(current_user)).to eq true
     end
 
-    scenario 'after second create login is not admin' do
+    xscenario 'after second create login is not admin' do
         user = User.create!(email: 'maria@campuscode.com', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                     street_name: 'Rua dois',

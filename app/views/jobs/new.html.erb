@@ -1,0 +1,34 @@
+<h1>Cadastrar nova vaga</h1>
+<%= form_with model: @job do |f| %>
+  <div>
+    <%= f.label :title, "Título" %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description, "Descrição" %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :salary_range, "Faixa Salárial" %>
+    <%= f.text_field :salary_range %>
+  </div>
+  <div>
+    <%= f.label :level, "Nível" %>
+    <%= f.text_field :level %>
+  </div>
+  <div>
+    <%= f.label :requirements, "Requisítos" %>
+    <%= f.text_field :requirements %>
+  </div>
+  <div>
+    <%= f.label :deadline, "Data Limite" %>
+    <%= f.text_field :deadline %>
+  </div>
+  <div>
+    <%= f.label :total_vacancies, "Total de Vagas" %>
+    <%= f.text_field :total_vacancies %>
+  </div>
+  <div>
+    <%= f.submit 'Cadastrar vaga' %>
+  </div>
+<% end %>

@@ -1,0 +1,22 @@
+<% if flash[:notice] %>
+  <div>
+    <p><%= flash[:notice] %></p>
+  </div>
+<% end %>
+<dl>
+  <dt>Título</dt>
+  <dl><%= @job.title %></dl>
+  <dt>Descrição</dt>
+  <dl><%= @job.description %></dl>
+  <dt>Faixa Salárial</dt>
+  <dl><%= @job.salary_range %></dl>
+  <dt>Nível</dt>
+  <dl><%= @job.level %></dl>
+  <dt>Requisítos</dt>
+  <dl><%= @job.requirements %></dl>
+  <dt>Data Limite de Inscrição</dt>
+  <dl><%= I18n.localize @job.deadline %></dl>
+  <dt>Total de Vagas</dt>
+  <dl><%= @job.total_vacancies %></dl>
+</dl>
+<%= link_to 'Voltar', root_path %>
