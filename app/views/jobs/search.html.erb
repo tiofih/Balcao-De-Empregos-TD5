@@ -1,0 +1,25 @@
+<% if @job.empty? %>
+  <div class='warning'>
+    <p>Nenhuma vaga encontrada :/</p>
+  </div>
+<% else %>
+  <% @job.each do |j| %>
+    <dl>
+      <dt>Título</dt>
+      <dd><%= j.title %></dd>
+      <dt>Descrição</dt>
+      <dd><%= j.description %></dd>
+      <dt>Faixa Salárial</dt>
+      <dd><%= j.salary_range %></dd>
+      <dt>Nível</dt>
+      <dd><%= j.level %></dd>
+      <dt>Requisítos</dt>
+      <dd><%= j.requirements %></dd>
+      <dt>Data Limite de Inscrição</dt>
+      <dd><%= I18n.localize j.deadline %></dd>
+      <dt>Total de Vagas</dt>
+      <dd><%= j.total_vacancies %></dd>
+    </dl>
+  <% end %>
+<% end %>
+<%= link_to 'Voltar', root_path %>

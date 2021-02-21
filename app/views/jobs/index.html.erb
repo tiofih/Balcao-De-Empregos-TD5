@@ -1,0 +1,25 @@
+<h1>Balcão de Empregos</h1>
+<h2>Boas vindas ao balcão de empregos!</h2>
+<%= form_with url: search_job_path, method: :get do %>
+  <%= label_tag :q, 'Busca' %>
+  <%= text_field_tag :q %>
+  <%= submit_tag 'Pesquisar' %>
+<% end %>
+<%= link_to 'Criar login', new_user_registration_path %>
+<%= link_to 'Cadastrar nova vaga', new_job_path %>
+<% if @job.empty? %>
+  <div class='warning'>
+    <p>Não há vagas cadastradas :/</p>
+  </div>
+<% else %>
+  <% @job.each do |j| %>
+    <div>
+      <dl>
+        <dt>Título da vaga</dt>
+        <dd><%= link_to j.title, job_path(j.id) %></dd>
+        <dt>Descrição</dt>
+        <dd><%= j.description %></dd>
+      </dl>
+    </div>
+  <% end %>
+<% end%>

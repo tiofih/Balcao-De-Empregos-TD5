@@ -1,4 +1,8 @@
 class JobsController < ApplicationController
+    def index
+        @job = Job.all
+    end
+
     def show
         @job = Job.find(params[:id])
     end
@@ -17,5 +21,9 @@ class JobsController < ApplicationController
             flash[:notice] = 'Alguns campos não podem ficar em branco'
             render new_job_path
         end
+    end
+
+    def search
+        @job = Job.where('title like ?', "%#{params[:q]}%")
     end
 end

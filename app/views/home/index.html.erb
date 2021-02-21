@@ -2,3 +2,13 @@
 <h2>Boas vindas ao balcão de empregos!</h2>
 <%= link_to 'Criar login', new_user_registration_path %>
 <%= link_to 'Cadastrar nova vaga', new_job_path %>
+<% @job.each do |j| %>
+  <div>
+    <dl>
+      <dt>Título da vaga</dt>
+      <dd><%= link_to j.name, job_path(j.id) %></dd>
+      <dt>Descrição</dt>
+      <dd><%= j.description %></dd>
+    </dl>
+  </div>
+<% end %>
