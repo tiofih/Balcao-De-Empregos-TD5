@@ -20,6 +20,7 @@ feature 'Collaborator registers a new company' do
         click_on 'Cadastrar empresa'
 
         expect(current_path).to eq company_path(Company.last)
+        expect(Company.last.user_id).to eq user.id
         expect(page).to have_content('Campus Code')
         expect(page).to have_css('img[src*="logo_da_campus.jpg"]')
         expect(page).to have_content('Rua vinte e seis, 252, Vila Olimpia, São Paulo')

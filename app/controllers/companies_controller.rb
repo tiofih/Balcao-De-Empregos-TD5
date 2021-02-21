@@ -3,6 +3,7 @@ class CompaniesController < ApplicationController
         @company = Company.find(params[:id])
     end
 
+    before_action :authenticate_user!
     def new
         @company = Company.new
     end
@@ -13,8 +14,10 @@ class CompaniesController < ApplicationController
                                         :street_number, :district,
                                         :city, :cnpj, :company_site,
                                         :company_instagram, :company_twitter,
-                                        :company_description, :logo)
+                                        :company_description, :logo, :user_id)
         @company = Company.new(company_params)
+        @company.user_id = current_user.id
+
         if @company.save
             redirect_to company_path(@company)
         else

@@ -54,9 +54,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   def after_sign_up_path_for(user)
     email = user[:email]
-    if Company.user_admin? (email) and Company.common_user?(email)
+    if Company.can_be_user_admin? (email) and Company.can_be_common_user?(email)
       super(user)
-    elsif Company.user_admin? (email) and !Company.common_user?(email)
+    elsif Company.can_be_user_admin? (email) and !Company.can_be_common_user?(email)
       new_company_path
     else
       super(user)
