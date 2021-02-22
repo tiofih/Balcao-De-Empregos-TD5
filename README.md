@@ -14,6 +14,8 @@
 
 :small_blue_diamond: [Descrição do projeto](#descrição-do-projeto)
 
+:small_blue_diamond: [Trello](#trello)
+
 :small_blue_diamond: [Funcionalidades](#funcionalidades)
 
 :small_blue_diamond: [Pré-requisitos](#pré-requisitos)
@@ -26,6 +28,10 @@
   Projeto criado para a primeira entrega do curso TreinaDev 5
   Para este projeto fomos desafiados a criar um site de gestão de vagas de emprego
 </p>
+
+## Trello
+
+Para organização do trabalho foi utilizado o Trello, que pode ser acessado [aqui](https://trello.com/b/7sMsjUm6/balc%C3%A3o-de-empregos-td5)
 
 ## Funcionalidades
 
