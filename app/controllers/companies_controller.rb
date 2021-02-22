@@ -19,6 +19,7 @@ class CompaniesController < ApplicationController
         @company.user_id = current_user.id
 
         if @company.save
+            Collaborator.create!(company_id: @company.id, user_id: @company.user_id)
             redirect_to company_path(@company)
         else
             flash[:notice] = 'Não foi possível cadastrar a empresa'

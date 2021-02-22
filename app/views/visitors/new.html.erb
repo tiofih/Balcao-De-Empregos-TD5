@@ -1,0 +1,26 @@
+<h1>Termine seu cadastro para se inscrever em várias vagas legais!</h1>
+<%= form_with model: @visitor do |f| %>
+  <div>
+    <%= f.label :name, "Nome" %>
+    <%= f.text_field :name %>
+  </div>
+  <div>
+    <%= f.label :cpf, "CPF" %>
+    <%= f.text_field :cpf %>
+  </div>
+  <div>
+    <%= f.label :phone, "Celular" %>
+    <%= f.text_field :phone %>
+  </div>
+  <div>
+    <%= f.label :bio, "Biografia" %>
+    <%= f.text_field :bio %>
+  </div>
+  <div>
+    <%= f.label :github, "Github" %>
+    <%= f.text_field :github %>
+  </div>
+  <div>
+    <%= f.submit 'Finalizar Cadastro' %>
+  </div>
+<% end %>

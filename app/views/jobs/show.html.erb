@@ -19,4 +19,5 @@
   <dt>Total de Vagas</dt>
   <dl><%= @job.total_vacancies %></dl>
 </dl>
+<%= link_to 'Candidatar-se', apply_job_path(@job), method: :post %>
 <%= link_to 'Voltar', root_path %>
