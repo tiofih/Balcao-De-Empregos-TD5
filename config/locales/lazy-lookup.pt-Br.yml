@@ -1,8 +1,17 @@
 pt-BR:
   activerecord:
     company:
-      one: Empresa
-      other: Empresas
+      one: "Empresa"
+      other: "Empresas"
+    collaborator:
+      one: "Colaborador"
+      other: "Colaboradores"
+    visitor:
+      one: "Visitante"
+      other: "Visitantes"
+    job:
+      one: "Vaga"
+      other: "Vagas"
     attributes:
       company:
         company_name: "Nome da empresa"
@@ -15,3 +24,17 @@ pt-BR:
         company_instagram: "Instagram"
         company_twitter: "Twitter"
         company_description: "Descrição da empresa"
+      job:
+        title: "Título"
+        description: "Descrição"
+        salary_range: "Faixa Salarial"
+        level: "Nível"
+        deadline: "Data Limite"
+        total_vacancies: "Total de Vagas"
+        requirements: "Requisítos"
+      visitor: 
+        name: "Nome"
+        cpf: "CPF"
+        phone: "Celular"
+        bio: "Biografia"
+        github: "Github"

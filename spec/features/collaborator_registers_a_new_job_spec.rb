@@ -12,7 +12,7 @@ feature 'Collaborator registers a new job' do
         visit new_job_path
         fill_in 'Título', with: 'Vaga Legal'
         fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
-        fill_in 'Faixa Salárial', with: '2500'
+        fill_in 'Faixa Salarial', with: '2500'
         #TODO: Mudar para select
         fill_in 'Nível', with: 'Júnior'
         #TODO: Mudar para CheckBox
@@ -36,7 +36,7 @@ feature 'Collaborator registers a new job' do
         visit new_job_path
         fill_in 'Título', with: ''
         fill_in 'Descrição', with: ''
-        fill_in 'Faixa Salárial', with: ''
+        fill_in 'Faixa Salarial', with: ''
         #TODO: Mudar para select
         fill_in 'Nível', with: ''
         #TODO: Mudar para CheckBox
