@@ -66,7 +66,7 @@ git clone https://github.com/React-Bootcamp-WoMarkersCode/certificate-generator
 Navegue até a pasta e execute o comando:
 
 ```
-$ bundle install
+$ bin/setup
 ```
 
 ## Como rodar os testes

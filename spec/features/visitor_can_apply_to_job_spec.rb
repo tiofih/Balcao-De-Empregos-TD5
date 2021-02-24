@@ -58,6 +58,7 @@ feature 'Visitor can apply to job' do
         click_on 'Vaga Legal'
         click_on 'Candidatar-se'
         
+        expect(current_path).to eq job_path(job)
         expect(page).not_to have_link('Candidatar-se')
     end
 end
