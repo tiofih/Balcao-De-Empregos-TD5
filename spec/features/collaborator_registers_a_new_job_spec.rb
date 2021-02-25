@@ -45,6 +45,60 @@ feature 'Collaborator registers a new job' do
         fill_in 'Total de Vagas', with: ''
         click_on 'Cadastrar vaga'
 
-        expect(page).to have_content('Alguns campos não podem ficar em branco')
+        expect(page).to have_content('Alguns campos não podem ficar em branco, veja abaixo:')
+        expect(page).to have_content('Título não pode ficar em branco')
+        expect(page).to have_content('Descrição não pode ficar em branco')
+        expect(page).to have_content('Faixa Salarial não pode ficar em branco')
+        expect(page).to have_content('Nível não pode ficar em branco')
+        expect(page).to have_content('Requisítos não pode ficar em branco')
+        expect(page).to have_content('Total de Vagas não pode ficar em branco')
+    end
+
+    scenario 'and deadline cannot be in the past' do
+        visit new_job_path
+        fill_in 'Título', with: 'Vaga Legal'
+        fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
+        fill_in 'Faixa Salarial', with: '2500'
+        #TODO: Mudar para select
+        fill_in 'Nível', with: 'Júnior'
+        #TODO: Mudar para CheckBox
+        fill_in 'Requisítos', with: 'Ruby On Rails'
+        fill_in 'Data Limite', with: '22/02/2021'
+        fill_in 'Total de Vagas', with: '10'
+        click_on 'Cadastrar vaga'
+
+        expect(page).to have_content('Data Limite não pode ser no passado')
+    end
+
+    scenario 'and salary range cannot be less then 1' do
+        visit new_job_path
+        fill_in 'Título', with: 'Vaga Legal'
+        fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
+        fill_in 'Faixa Salarial', with: '-1'
+        #TODO: Mudar para select
+        fill_in 'Nível', with: 'Júnior'
+        #TODO: Mudar para CheckBox
+        fill_in 'Requisítos', with: 'Ruby On Rails'
+        fill_in 'Data Limite', with: '22/12/2022'
+        fill_in 'Total de Vagas', with: '10'
+        click_on 'Cadastrar vaga'
+
+        expect(page).to have_content('Faixa Salarial não pode ser menor que 1')
+    end
+
+    scenario 'and total vacancies cannot be less then 1' do
+        visit new_job_path
+        fill_in 'Título', with: 'Vaga Legal'
+        fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
+        fill_in 'Faixa Salarial', with: '2500'
+        #TODO: Mudar para select
+        fill_in 'Nível', with: 'Júnior'
+        #TODO: Mudar para CheckBox
+        fill_in 'Requisítos', with: 'Ruby On Rails'
+        fill_in 'Data Limite', with: '22/12/2022'
+        fill_in 'Total de Vagas', with: '0'
+        click_on 'Cadastrar vaga'
+
+        expect(page).to have_content('Total de Vagas não pode ser menor que 1')
     end
 end

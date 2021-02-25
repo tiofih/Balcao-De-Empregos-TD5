@@ -1,4 +1,7 @@
 <h1>Termine seu cadastro para se inscrever em várias vagas legais!</h1>
+<% @visitor.errors&.full_messages&.each do |m| %>
+  <%= m %>
+<% end %>
 <%= form_with model: @visitor do |f| %>
   <div>
     <%= f.label :name %>

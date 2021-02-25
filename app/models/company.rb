@@ -4,6 +4,8 @@ class Company < ApplicationRecord
     validates :company_name, :street_name, :street_number, :district, 
                 :city, :cnpj, :company_site, presence: true
 
+    validates :company_name, :cnpj, uniqueness: true
+    
     after_save :include_collaborator_in_a_company
 
     def self.can_be_user_admin? (email)

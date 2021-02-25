@@ -1,6 +1,11 @@
 <h1>Cadastrar empresa</h1>
 <% if flash[:notice] %>
   <div class="notice"><%= flash[:notice] %></div>
+  <% if @company.errors.any? %>
+    <% @company.errors.full_messages.each do |m| %>
+      <%= m %>
+    <% end %>
+  <% end %>
 <% end %>
 <%= form_with model: @company do |form| %>
   <div>

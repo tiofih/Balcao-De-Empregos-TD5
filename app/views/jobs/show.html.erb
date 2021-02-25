@@ -19,7 +19,7 @@
   <dt>Total de Vagas</dt>
   <dl><%= @job.total_vacancies %></dl>
 </dl>
-<% if !@job.already_applied?(@job.id, current_user&.visitor&.ids&.first) %>
+<% if !@job.already_applied?(current_user&.visitor&.ids&.first) %>
   <%= link_to 'Candidatar-se', apply_job_path(@job), method: :post %>
 <% end %>
 <%= link_to 'Voltar', root_path %>

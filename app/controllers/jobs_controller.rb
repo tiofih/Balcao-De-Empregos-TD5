@@ -24,8 +24,8 @@ class JobsController < ApplicationController
         if @job.save
             redirect_to job_path(@job)
         else
-            flash[:notice] = 'Alguns campos não podem ficar em branco'
-            render new_job_path
+            flash[:notice] = 'Alguns campos não podem ficar em branco, veja abaixo:'
+            render 'new'
         end
     end
 
@@ -36,7 +36,7 @@ class JobsController < ApplicationController
     def apply 
         @job = Job.find(params[:id])
         if current_user != nil
-            @job.apply(@job.id, current_user.visitor.ids.first)
+            @job.apply(current_user.visitor.ids.first)
             redirect_to job_path(@job), notice: 'Parabéns, você está concorrendo a vaga!"'
         else
             redirect_to new_user_session_path, notice: 'Você deve se cadastrar para se candidatar a vagas'

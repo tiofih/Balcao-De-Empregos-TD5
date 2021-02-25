@@ -17,7 +17,7 @@ describe Job do
                     requirements: 'Ruby',
                     deadline: '22/12/2022', total_vacancies: '5')
 
-            job.apply(job.id, visitor.id)
+            job.apply(visitor.id)
 
             expect(JobVisitor.last.job_id).to eq job.id
             expect(JobVisitor.last.visitor_id).to eq visitor.id
@@ -38,8 +38,8 @@ describe Job do
                     requirements: 'Ruby',
                     deadline: '22/12/2022', total_vacancies: '5')
 
-            job.apply(job.id, visitor.id)
-            job.apply(job.id, visitor.id)
+            job.apply(visitor.id)
+            job.apply(visitor.id)
 
             expect(JobVisitor.count).to eq 1
         end

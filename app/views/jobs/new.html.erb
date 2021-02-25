@@ -1,4 +1,7 @@
 <h1>Cadastrar nova vaga</h1>
+<% @job.errors&.full_messages&.each do |m| %>
+  <%= m %>
+<% end %>
 <%= form_with model: @job do |f| %>
   <div>
     <%= f.label :title %>
