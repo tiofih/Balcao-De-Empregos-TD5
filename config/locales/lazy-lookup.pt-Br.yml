@@ -38,3 +38,15 @@ pt-BR:
         phone: "Celular"
         bio: "Biografia"
         github: "Github"
+  companies:
+    create:
+      error: "Não foi possível cadastrar a empresa, veja erros abaixo:"
+  jobs:
+    apply:
+      success: "Parabéns, você está concorrendo a vaga!"
+      error: "Você deve se cadastrar para se candidatar a vagas"
+    create:
+      error: "Alguns campos não podem ficar em branco, veja abaixo:"
+  visitors:
+    create:
+      error: "Alguns campos não podem ficar em branco, veja abaixo:"

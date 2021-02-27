@@ -18,7 +18,7 @@ class VisitorsController < ApplicationController
         if @visitor.save
             redirect_to visitor_path(Visitor.last)
         else
-            flash[:notice] = 'Alguns campos não podem ficar em branco, veja abaixo:'
+            flash[:notice] = t('.error')
             render 'new'
         end
     end
