@@ -1,6 +1,16 @@
-<% @job_application.each do |ja|%>
-  <div id="job_application-<%= ja.id %>">
-    <h2><%= ja.visitor.name %> se inscreveu em <%= ja.job.title %></h2>
-    <%= link_to 'Aceitar candidatura', accept_job_application_path %>
-  </div>
-<% end %>
+<% if @job_application.empty? %>
+  <p>Não há candidaturas</p>
+<% else %>
+  <% @job_application.each do |ja|%>
+    <div id="job_application-<%= ja.id %>">
+      <h2><%= ja.visitor.name %> se inscreveu em <%= ja.job.title %></h2>
+      <% if ja.pending? %>
+        <%= link_to 'Aceitar candidatura', accept_job_application_path(ja), method: :post %>
+        <%= link_to 'Negar candidatura', deny_job_application_path(ja), method: :post %>
+      <% end %>
+      <% if flash[:notice] %>
+        <%= flash[:notice] %>
+      <% end %>
+    </div>
+  <% end %>
+<% end%>

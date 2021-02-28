@@ -7,5 +7,11 @@ Rails.application.routes.draw do
   end
   get 'search_job', to: 'jobs#search'
   get 'search_job_application', to: 'job_applications#search'
+  resources :job_applications, only: [] do
+    member do
+      post 'accept'
+      post 'deny'
+    end
+  end
   resources :visitors, only: [:show, :new, :create]
 end

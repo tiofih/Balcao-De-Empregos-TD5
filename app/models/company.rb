@@ -6,4 +6,17 @@ class Company < ApplicationRecord
                 :city, :cnpj, :company_site, presence: true
 
     validates :company_name, :cnpj, uniqueness: true
+
+    after_save :include_in_collaborators
+
+    private
+    def include_in_collaborators
+        if self.id != 1
+            search = Collaborator.where(company_id: self.id)
+            if search.empty?
+                
+                Collaborator.last.update!(:company => self)
+            end
+        end
+    end
 end

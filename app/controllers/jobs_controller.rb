@@ -38,7 +38,7 @@ class JobsController < ApplicationController
     def apply 
         @job = Job.find(params[:id])
         if current_user != nil
-            @job.apply(current_user.visitor.ids.first)
+            @job.apply(current_user.visitor.id)
             redirect_to job_path(@job), notice: t('.success')
         else
             redirect_to new_user_session_path, notice: t('.error')
