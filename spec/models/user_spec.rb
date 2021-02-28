@@ -2,6 +2,20 @@ require 'rails_helper'
 
 describe User do
     context 'validation' do
+        it 'must determine if can be collaborator' do
+            user = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+            
+            expect(user.can_be_collaborator?).to eq true
+            expect(user.can_be_visitor?).to eq false
+        end
+
+        it 'must determine if can be visitor' do
+            user = User.create!(email: 'filipe@gmail.com.br', password: '123456')
+            
+            expect(user.can_be_collaborator?).to eq false
+            expect(user.can_be_visitor?).to eq true
+        end
+
         it 'must include in collaborators if enterprise email' do
             first_user = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
             company = Company.create!(company_name: 'Campus Code',

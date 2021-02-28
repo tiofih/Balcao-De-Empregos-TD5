@@ -6,5 +6,6 @@ Rails.application.routes.draw do
     post 'apply', on: :member
   end
   get 'search_job', to: 'jobs#search'
+  get 'search_job_application', to: 'job_applications#search'
   resources :visitors, only: [:show, :new, :create]
 end

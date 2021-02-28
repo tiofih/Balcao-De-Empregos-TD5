@@ -7,6 +7,7 @@
 <% end %>
 <%= link_to 'Criar login', new_user_registration_path %>
 <%= link_to 'Cadastrar nova vaga', new_job_path %>
+<%= link_to 'Visualizar candidaturas', search_job_application_path %>
 <% if @job.empty? %>
   <div class='warning'>
     <p>Não há vagas cadastradas :/</p>

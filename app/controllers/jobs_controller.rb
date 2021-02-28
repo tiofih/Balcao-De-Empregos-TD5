@@ -18,8 +18,10 @@ class JobsController < ApplicationController
                                                 :level,
                                                 :requirements,
                                                 :deadline,
-                                                :total_vacancies)
+                                                :total_vacancies,
+                                                :company_id)
         @job = Job.new(job_params)
+        @job.company_id = current_user.collaborator.company_id
 
         if @job.save
             redirect_to job_path(@job)

@@ -9,6 +9,17 @@ feature 'Collaborator registers a new job' do
     end
 
     scenario 'succesfully' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
+
         visit new_job_path
         fill_in 'Título', with: 'Vaga Legal'
         fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
@@ -33,6 +44,17 @@ feature 'Collaborator registers a new job' do
     end
 
     scenario 'and attributes cannot be blanck' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
+                    
         visit new_job_path
         fill_in 'Título', with: ''
         fill_in 'Descrição', with: ''
@@ -55,6 +77,17 @@ feature 'Collaborator registers a new job' do
     end
 
     scenario 'and deadline cannot be in the past' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
+
         visit new_job_path
         fill_in 'Título', with: 'Vaga Legal'
         fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
@@ -71,6 +104,17 @@ feature 'Collaborator registers a new job' do
     end
 
     scenario 'and salary range cannot be less then 1' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
+
         visit new_job_path
         fill_in 'Título', with: 'Vaga Legal'
         fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'
@@ -87,6 +131,17 @@ feature 'Collaborator registers a new job' do
     end
 
     scenario 'and total vacancies cannot be less then 1' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
+        
         visit new_job_path
         fill_in 'Título', with: 'Vaga Legal'
         fill_in 'Descrição', with: 'Uma vaga muito legal para pessoas bacanas numa empresa incrível'

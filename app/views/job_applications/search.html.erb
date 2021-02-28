@@ -1,0 +1,6 @@
+<% @job_application.each do |ja|%>
+  <div id="job_application-<%= ja.id %>">
+    <h2><%= ja.visitor.name %> se inscreveu em <%= ja.job.title %></h2>
+    <%= link_to 'Aceitar candidatura', accept_job_application_path %>
+  </div>
+<% end %>

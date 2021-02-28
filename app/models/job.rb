@@ -1,6 +1,7 @@
 class Job < ApplicationRecord
     has_many :job_visitors
     has_many :visitors, through: :job_visitors
+    belongs_to :company
     validates :title, 
                 :description, 
                 :salary_range, 
@@ -16,12 +17,12 @@ class Job < ApplicationRecord
         if already_applied?(visitor_id)
             return false
         else
-            JobVisitor.create!(job_id: self.id, visitor_id: visitor_id)
+            JobApplication.create!(job_id: self.id, visitor_id: visitor_id)
         end
     end
 
     def already_applied?(visitor_id)
-        JobVisitor.find_by(job_id: self.id) and JobVisitor.find_by(visitor_id: visitor_id)
+        JobApplication.find_by(job_id: self.id) and JobApplication.find_by(visitor_id: visitor_id)
     end
 
     def deadline_cannot_be_in_the_past

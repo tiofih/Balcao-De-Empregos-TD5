@@ -16,7 +16,7 @@ class CompaniesController < ApplicationController
                                         :company_instagram, :company_twitter,
                                         :company_description, :logo, :user_id)
         @company = Company.new(company_params)
-        @company.user_id = current_user.id
+        @company.user_id = current_user.collaborator.id
 
         if @company.save
             Collaborator.create!(company_id: @company.id, user_id: @company.user_id)
