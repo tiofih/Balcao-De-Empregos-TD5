@@ -46,8 +46,22 @@ class Job < ApplicationRecord
     end
 
     def all_vacancies_filled?
-        accepted_vacancies = JobApplication.where('job_id like ?', self.id)
-        accepted_vacancies.count == self.total_vacancies
+        vacancies = JobApplication.where('job_id like ?', self.id)
+        collaborator_accepted = 0
+        visitor_accepted = 0
+        confirmed_vacancies = 0
+        vacancies.each do |av|
+            if av.accepted?
+                collaborator_accepted += 1
+            end
+            if av.visitor_accepted?
+                visitor_accepted += 1
+            end
+            if collaborator_accepted == visitor_accepted
+                confirmed_vacancies += 1
+            end
+        end
+        confirmed_vacancies == self.total_vacancies
     end
 
     def deadline_expired?
