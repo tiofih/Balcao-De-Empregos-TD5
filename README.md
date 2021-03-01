@@ -86,7 +86,6 @@ E para testes contamos com dois logins iniciais:
 |Nome|Email|Password|
 | -------- |-------- |-------- |
 |Filipe|filipe@campuscode.com.br|123456|
-| -------- |-------- |-------- |
 |Maria|maria@gmail.com.br|123457|
 
 ## Como rodar os testes

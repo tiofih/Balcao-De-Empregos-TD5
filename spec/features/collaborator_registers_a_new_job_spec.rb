@@ -2,6 +2,16 @@ require 'rails_helper'
 
 feature 'Collaborator registers a new job' do
     scenario 'acces page succesfully' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
+        login_as(collaborator, :scope => :user)
         visit root_path
         click_on 'Cadastrar nova vaga'
 
@@ -155,5 +165,20 @@ feature 'Collaborator registers a new job' do
         click_on 'Cadastrar vaga'
 
         expect(page).to have_content('Total de Vagas não pode ser menor que 1')
+    end
+
+    scenario 'and must be signed in to see button' do
+        visitor_user = User.create!(email: 'maria@gmail.com.br', password: '123457')
+        visitor = Visitor.create!(name: 'Maria',
+                                cpf: '12345678901',
+                                phone: '11912345678',
+                                bio: 'Lorem ipsum dolor sit amet',
+                                github: 'mariaz',
+                                user: visitor_user)
+
+        login_as(visitor_user, :scope => :user)
+        visit root_path
+        
+        expect(page).not_to have_content('Cadastrar nova vaga')
     end
 end

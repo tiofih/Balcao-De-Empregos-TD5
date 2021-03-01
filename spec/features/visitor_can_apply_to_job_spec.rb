@@ -56,7 +56,7 @@ feature 'Visitor can apply to job' do
         click_on 'Candidatar-se'
         
         expect(current_path).to eq new_user_session_path
-        expect(page).to have_content('Você deve se cadastrar para se candidatar a vagas')
+        expect(page).to have_content('Para continuar, faça login ou registre-se')
     end
 
     scenario 'and dont show button if already applied' do
