@@ -19,7 +19,14 @@
   <dt>Total de Vagas</dt>
   <dl><%= @job.total_vacancies %></dl>
 </dl>
-<% if !@job.already_applied?(current_user&.visitor&.id) %>
-  <%= link_to 'Candidatar-se', apply_job_path(@job), method: :post %>
+<% if @job.deadline_expired? %>
+  <p>Esta vaga já expirou!</p>
+<% else %>
+  <% if !@job.already_applied?(current_user&.visitor&.id) %>
+    <%= link_to 'Candidatar-se', apply_job_path(@job), method: :post %>
+  <% end %>
+<% end %>
+<% if @job.all_vacancies_filled? %>
+  <p>Todas as vagas já foram preenchidas!</p>
 <% end %>
 <%= link_to 'Voltar', root_path %>
