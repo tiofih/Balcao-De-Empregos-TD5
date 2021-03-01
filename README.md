@@ -47,6 +47,12 @@ Para organização do trabalho foi utilizado o Trello, que pode ser acessado [aq
 
 :heavy_check_mark: Visitantes podem concorrer a vagas
 
+:heavy_check_mark: Colaboradores recebem as candidaturas e podem aceitar ou negar o candidato 
+
+:heavy_check_mark: Candidatos acompanham suas vagas
+
+:heavy_check_mark: Vagas são desabilitadas automáticamente
+
 ## Pré-requisitos
 
 :warning: [Node](https://nodejs.org/en/download/)
@@ -68,6 +74,20 @@ Navegue até a pasta e execute o comando:
 ```
 $ bin/setup
 ```
+
+Para popular o programa, use o comando:
+
+```
+$ rails db:seeds
+```
+
+E para testes contamos com dois logins iniciais:
+
+|Nome|Email|Password|
+| -------- |-------- |-------- |
+|Filipe|filipe@campuscode.com.br|123456|
+| -------- |-------- |-------- |
+|Maria|maria@gmail.com.br|123457|
 
 ## Como rodar os testes
 
