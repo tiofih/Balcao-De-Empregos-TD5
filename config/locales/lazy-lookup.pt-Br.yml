@@ -12,6 +12,9 @@ pt-BR:
     job:
       one: "Vaga"
       other: "Vagas"
+    job_application:
+      one: "Candidatura"
+      other: "Candidaturas"
     attributes:
       company:
         company_name: "Nome da empresa"
@@ -38,6 +41,11 @@ pt-BR:
         phone: "Celular"
         bio: "Biografia"
         github: "Github"
+      job_application:
+        status: "Estado"
+        observation: "Observação"
+        initial_date: "Data de Início"
+        salary: "Proposta Salarial"
   companies:
     create:
       error: "Não foi possível cadastrar a empresa, veja erros abaixo:"
@@ -50,3 +58,7 @@ pt-BR:
   visitors:
     create:
       error: "Alguns campos não podem ficar em branco, veja abaixo:"
+  pending: "Pendente"
+  accepted: "Aceita"
+  denied: "Negada"
+  vanquished: "Vencida"

@@ -1,0 +1,25 @@
+<% if @job_application.empty? %>
+  <p>Não há candidaturas ainda</p>
+<% else %>
+  <% @job_application.each do |ja| %>
+    <p>Você se candidatou em <%= ja.job.title %></p>
+    <p>Avaliação <%= I18n.t ja.status %></p>
+    <% if ja.accepted? %>
+      <%= ja.observation %>
+      <%= ja.salary %>
+      <%= I18n.l ja.initial_date %>
+      <%= select_tag 'Aceita a data de inicio?', raw("<option>Sim</option><option>Não</option>")%>
+      <%= form_with model: ja do |form| %>
+        <div>
+          <%= form.label :visitor_observation, 'Observação' %>
+          <%= form.text_field :visitor_observation %>
+        </div>
+      <% end %>
+      <%= link_to 'Confirmar', visitor_accept_job_application_path(ja), method: :post %>
+      <%= link_to 'Negar', visitor_deny_job_application_path(ja), method: :post %>
+    <% end %>
+    <% if ja.denied? %>
+      <%= ja.observation %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -10,6 +10,9 @@
 <% if current_user&.visitor&.id == nil %>
   <%= link_to 'Visualizar candidaturas', search_job_application_path %>
 <% end %>
+<% if current_user&.collaborator&.id == nil%>
+  <%= link_to 'Acompanhar candidaturas', job_applications_path %>
+<% end %>
 <% if @job.empty? %>
   <div class='warning'>
     <p>Não há vagas cadastradas :/</p>

@@ -5,6 +5,20 @@
     <div id="job_application-<%= ja.id %>">
       <h2><%= ja.visitor.name %> se inscreveu em <%= ja.job.title %></h2>
       <% if ja.pending? %>
+        <%= form_with model: ja do |form| %>
+          <div>
+            <%= form.label :observation %>
+            <%= form.text_field :observation %>
+          </div>
+          <div>
+            <%= form.label :salary %>
+            <%= form.text_field :salary %>
+          </div>
+          <div>
+            <%= form.label :initial_date %>
+            <%= form.date_field :initial_date %>
+          </div>
+        <% end %>
         <%= link_to 'Aceitar candidatura', accept_job_application_path(ja), method: :post %>
         <%= link_to 'Negar candidatura', deny_job_application_path(ja), method: :post %>
       <% end %>

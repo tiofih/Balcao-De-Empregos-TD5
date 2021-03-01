@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Collaborator receives a job application' do
+feature 'Visistor access job applications' do
     scenario 'succesfully' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
@@ -25,17 +25,16 @@ feature 'Collaborator receives a job application' do
                     deadline: '22/12/2022', total_vacancies: '5',
                     company_id: company.id)
         job.apply(visitor.id)
-        
-        login_as(collaborator, :scope => :user)
-        
-        visit root_path
-        click_on 'Visualizar candidaturas'
 
-        expect(current_path).to eq search_job_application_path
-        expect(page).to have_content("Maria se inscreveu em Vaga Legal")
+        login_as(visitor_user, :scope => :user)
+        visit root_path
+        click_on 'Acompanhar candidaturas'
+
+        expect(page).to have_content 'Você se candidatou em Vaga Legal'
+        expect(page).to have_content 'Avaliação Pendente'
     end
 
-    scenario 'and can accept a job application' do
+    scenario 'and only visitors can see job applications' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
@@ -62,22 +61,11 @@ feature 'Collaborator receives a job application' do
 
         login_as(collaborator, :scope => :user)
         visit root_path
-        click_on 'Visualizar candidaturas'
-        within("div#job_application-#{JobApplication.last.id}") do
-            fill_in 'Observação', with: 'Gostamos muito do seu perfil'
-            fill_in 'Proposta Salarial', with: '3000'
-            fill_in 'Data de Início', with: '01/03/2021'
-            click_on 'Aceitar candidatura'
-        end
 
-        expect(current_path).to eq search_job_application_path
-        within("div#job_application-#{JobApplication.last.id}") do
-            expect(page).to have_content('Você aceitou a candidatura')
-            expect(page).not_to have_content('Aceitar candidatura')
-        end
+        expect(page).not_to have_content('Acompanhar candidaturas')
     end
 
-    scenario 'and can deny a job application' do
+    scenario 'and can view if company accept job applications' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
@@ -101,23 +89,24 @@ feature 'Collaborator receives a job application' do
                     deadline: '22/12/2022', total_vacancies: '5',
                     company_id: company.id)
         job.apply(visitor.id)
+        JobApplication.last.accept_application(observation: 'Gostamos do seu perfil',
+                                                salary: '3000',
+                                                initial_date: '01/03/2021')
 
-        login_as(collaborator, :scope => :user)
+        login_as(visitor_user, :scope => :user)
         visit root_path
-        click_on 'Visualizar candidaturas'
-        within("div#job_application-#{JobApplication.last.id}") do
-            fill_in 'Observação', with: 'Gostamos muito do seu perfil, porém procuramos outras habilidades'
-            click_on 'Negar candidatura'
-        end
+        click_on 'Acompanhar candidaturas'
 
-        expect(current_path).to eq search_job_application_path
-        within("div#job_application-#{JobApplication.last.id}") do
-            expect(page).to have_content('Você negou a candidatura')
-            expect(page).not_to have_content('Negar candidatura')
-        end
+        expect(page).to have_content('Você se candidatou em Vaga Legal')
+        expect(page).to have_content('Avaliação Aceita')
+        expect(page).to have_content('Gostamos do seu perfil')
+        expect(page).to have_content('3000')
+        expect(page).to have_content('01/03/2021')
+        expect(page).to have_content('Confirmar')
+        expect(page).to have_content('Negar')
     end
 
-    scenario 'and a message is show if there are no job applications' do
+    scenario 'and can view if company deny job applications' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
@@ -127,15 +116,33 @@ feature 'Collaborator receives a job application' do
                                             cnpj: '42.318.949/0001-84',
                                             company_site: 'www.campuscode.com.br',
                                             user_id: collaborator.id)
+        visitor_user = User.create!(email: 'maria@gmail.com.br', password: '123457')
+        visitor = Visitor.create!(name: 'Maria',
+                                cpf: '12345678901',
+                                phone: '11912345678',
+                                bio: 'Lorem ipsum dolor sit amet',
+                                github: 'mariaz',
+                                user: visitor_user)
+        job = Job.create!(title: 'Vaga Legal', 
+                    description: 'Uma vaga muito legal mesmo',
+                    salary_range: '2500', level: 'Júnior',
+                    requirements: 'Ruby',
+                    deadline: '22/12/2022', total_vacancies: '5',
+                    company_id: company.id)
+        job.apply(visitor.id)
+        JobApplication.last.deny_application(observation: 'Gostamos do seu perfil porém procuramos outras habilidades')
 
-        login_as(collaborator, :scope => :user)
+        login_as(visitor_user, :scope => :user)
         visit root_path
-        click_on 'Visualizar candidaturas'
+        click_on 'Acompanhar candidaturas'
 
-        expect(page).to have_content('Não há candidaturas')        
+        expect(page).to have_content('Você se candidatou em Vaga Legal')
+        expect(page).to have_content('Avaliação Negada')
+        expect(page).to have_content('Gostamos do seu perfil porém procuramos outras habilidades')
+
     end
 
-    scenario 'and just collaborators can see job applications' do
+    scenario 'and show a message if no job applications' do
         visitor_user = User.create!(email: 'maria@gmail.com.br', password: '123457')
         visitor = Visitor.create!(name: 'Maria',
                                 cpf: '12345678901',
@@ -145,13 +152,13 @@ feature 'Collaborator receives a job application' do
                                 user: visitor_user)
 
         login_as(visitor_user, :scope => :user)
-
         visit root_path
+        click_on 'Acompanhar candidaturas'
 
-        expect(page).not_to have_content('Visualizar candidaturas')
+        expect(page).to have_content('Não há candidaturas ainda')
     end
 
-    scenario 'and just same company collaborators can see job applications' do
+    scenario 'and can accept job application' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
@@ -175,20 +182,54 @@ feature 'Collaborator receives a job application' do
                     deadline: '22/12/2022', total_vacancies: '5',
                     company_id: company.id)
         job.apply(visitor.id)
-        another_collaborator = User.create!(email: 'patricia@acme.com.br', password: '123456')
-        another_company = Company.create!(company_name: 'Acme',
+        JobApplication.last.accept_application(observation: 'Gostamos do seu perfil',
+                                                salary: '3000',
+                                                initial_date: '01/03/2021')
+
+        login_as(visitor_user, :scope => :user)
+        visit root_path
+        click_on 'Acompanhar candidaturas'
+        select('Sim', from: 'Aceita a data de inicio?')
+        click_on 'Confirmar'
+
+        expect(page).to have_content('Parabéns!')
+    end
+
+    scenario 'and can deny job application' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
                                             street_number: '252',
                                             district: 'Vila Olimpia',
                                             city: 'São Paulo',
-                                            cnpj: '42.318.949/0001-78',
+                                            cnpj: '42.318.949/0001-84',
                                             company_site: 'www.campuscode.com.br',
-                                            user_id: another_collaborator.id)
+                                            user_id: collaborator.id)
+        visitor_user = User.create!(email: 'maria@gmail.com.br', password: '123457')
+        visitor = Visitor.create!(name: 'Maria',
+                                cpf: '12345678901',
+                                phone: '11912345678',
+                                bio: 'Lorem ipsum dolor sit amet',
+                                github: 'mariaz',
+                                user: visitor_user)
+        job = Job.create!(title: 'Vaga Legal', 
+                    description: 'Uma vaga muito legal mesmo',
+                    salary_range: '2500', level: 'Júnior',
+                    requirements: 'Ruby',
+                    deadline: '22/12/2022', total_vacancies: '5',
+                    company_id: company.id)
+        job.apply(visitor.id)
+        JobApplication.last.accept_application(observation: 'Gostamos do seu perfil',
+                                                salary: '3000',
+                                                initial_date: '01/03/2021')
 
-        login_as(another_collaborator, :scope => :user)
+        login_as(visitor_user, :scope => :user)
         visit root_path
-        click_on 'Visualizar candidaturas'
-        
-        expect(page).not_to have_content("Maria se inscreveu em Vaga Legal")
+        click_on 'Acompanhar candidaturas'
+        select('Não', from: 'Aceita a data de inicio?')
+        fill_in 'Observação', with: 'Achei outra vaga antes desta'
+        click_on 'Negar'
+
+        expect(page).to have_content('Uma pena! Mas há outras vagas te esperando')
     end
 end
