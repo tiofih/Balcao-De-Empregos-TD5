@@ -46,6 +46,7 @@ pt-BR:
         observation: "Observação"
         initial_date: "Data de Início"
         salary: "Proposta Salarial"
+        visitor_observation: "Observação"
   companies:
     create:
       error: "Não foi possível cadastrar a empresa, veja erros abaixo:"

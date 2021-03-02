@@ -11,7 +11,7 @@
       <%= select_tag 'Aceita a data de inicio?', raw("<option>Sim</option><option>Não</option>")%>
       <%= form_with model: ja do |form| %>
         <div>
-          <%= form.label :visitor_observation, 'Observação' %>
+          <%= form.label :visitor_observation %>
           <%= form.text_field :visitor_observation %>
         </div>
       <% end %>

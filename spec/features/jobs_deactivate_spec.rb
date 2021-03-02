@@ -59,7 +59,7 @@ feature 'Jobs deactivate' do
                     description: 'Uma vaga muito legal mesmo',
                     salary_range: '2500', level: 'Júnior',
                     requirements: 'Ruby',
-                    deadline: '01/03/2021', total_vacancies: '1',
+                    deadline: '10/03/2021', total_vacancies: '1',
                     company_id: company.id)
 
         travel_to(Date.current + 5.day)
