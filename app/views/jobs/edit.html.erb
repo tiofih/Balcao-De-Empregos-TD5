@@ -1,0 +1,40 @@
+<h1>Editar vaga</h1>
+<% if flash[:notice] %>
+  <%= flash[:notice] %>
+  <% @job.errors&.full_messages&.each do |m| %>
+    <%= m %>
+  <% end %>
+<% end %>
+<%= form_with model: @job do |f| %>
+  <div>
+    <%= f.label :title %>
+    <%= f.text_field :title %>
+  </div>
+  <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+  <div>
+    <%= f.label :salary_range %>
+    <%= f.text_field :salary_range %>
+  </div>
+  <div>
+    <%= f.label :level %>
+    <%= f.text_field :level %>
+  </div>
+  <div>
+    <%= f.label :requirements %>
+    <%= f.text_field :requirements %>
+  </div>
+  <div>
+    <%= f.label :deadline %>
+    <%= f.text_field :deadline %>
+  </div>
+  <div>
+    <%= f.label :total_vacancies %>
+    <%= f.text_field :total_vacancies %>
+  </div>
+  <div>
+    <%= f.submit 'Editar vaga' %>
+  </div>
+<% end %>

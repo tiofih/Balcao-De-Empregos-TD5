@@ -19,6 +19,9 @@
   <dt>Total de Vagas</dt>
   <dl><%= @job.total_vacancies %></dl>
 </dl>
+<% if current_user&.collaborator&.id != nil %>
+  <%= link_to 'Editar Vaga', edit_job_path(@job) %>
+<% end %>
 <% if @job.deadline_expired? %>
   <p>Esta vaga já expirou!</p>
 <% else %>

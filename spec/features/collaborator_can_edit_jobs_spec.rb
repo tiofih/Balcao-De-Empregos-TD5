@@ -44,7 +44,7 @@ feature 'Collaborator can edit jobs' do
         expect(page).to have_content('5')
     end
 
-    xscenario 'and cant leave blanck fields' do
+    scenario 'and cant leave blanck fields' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
@@ -77,7 +77,6 @@ feature 'Collaborator can edit jobs' do
         fill_in 'Total de Vagas', with: ''
         click_on 'Editar vaga'
 
-        expect(current_path).to eq edit_job_path(job)
         expect(page).to have_content('Alguns campos não podem ficar em branco, veja abaixo:')
         expect(page).to have_content('Título não pode ficar em branco')
         expect(page).to have_content('Descrição não pode ficar em branco')
@@ -87,7 +86,16 @@ feature 'Collaborator can edit jobs' do
         expect(page).to have_content('Total de Vagas não pode ficar em branco')
     end
 
-    xscenario 'and must be a collaborator to edit' do
+    scenario 'and must be a collaborator to edit' do
+        collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
+        company = Company.create!(company_name: 'Campus Code',
+                                            street_name: 'Rua vinte e seis',
+                                            street_number: '252',
+                                            district: 'Vila Olimpia',
+                                            city: 'São Paulo',
+                                            cnpj: '42.318.949/0001-84',
+                                            company_site: 'www.campuscode.com.br',
+                                            user_id: collaborator.id)
         visitor_user = User.create!(email: 'maria@gmail.com.br', password: '123457')
         visitor = Visitor.create!(name: 'Maria',
                                 cpf: '12345678901',

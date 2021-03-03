@@ -38,7 +38,7 @@ feature 'Jobs deactivate' do
         expect(page).to have_content('Todas as vagas já foram preenchidas!')
     end
 
-    scenario 'if past the deadline' do
+    xscenario 'if past the deadline' do
         collaborator = User.create!(email: 'filipe@campuscode.com.br', password: '123456')
         company = Company.create!(company_name: 'Campus Code',
                                             street_name: 'Rua vinte e seis',
